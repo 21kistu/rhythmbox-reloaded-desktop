@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>default-graphic.svg</file>
+        <file>gruvbox-stylesheet.css</file>
+    </qresource>
+</RCC>
