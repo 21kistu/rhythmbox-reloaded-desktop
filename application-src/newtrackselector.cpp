@@ -29,20 +29,20 @@ void NewTrackSelector::on_fileSelectionButton_clicked()
         fileSelection = QFileDialog::getOpenFileName(this, "New track selection", "");
     }
     QTextStream qStdOut(stdout);
-    ui->fileLocationLabel->setText(fileSelection);
+    if (fileSelection != ""){
+        ui->fileLocationLabel->setText(fileSelection);
+    }
 
     QFileInfo fileInfo(fileSelection);
     QString baseName = fileInfo.baseName();
 
     int delimiterIndex = baseName.indexOf(" - ");
 
+    // Split if delimiter (' - ') exists and autofill title/artists
     if(delimiterIndex != -1){
         // At least one occurence exists
         ui->titleEdit->setText(baseName.left(delimiterIndex));
         ui->artistEdit->setText(baseName.mid(delimiterIndex + 3));
-    } else {
-        // Delimiter does not exist in filename
-        ui->titleEdit->setText(baseName);
     }
 }
 
@@ -73,5 +73,11 @@ void NewTrackSelector::setInitial(const char* title, const char* artist, const c
     ui->artistEdit->setText(artist);
     ui->fileLocationLabel->setText(fileLocation);
     initialSet = true;
+}
+
+
+void NewTrackSelector::on_buttonBox_accepted()
+{
+
 }
 
