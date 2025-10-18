@@ -4,6 +4,11 @@ Built with two criteria in mind:
 - playback completion recording
 - clean material-design inspired interface
 
+[<img src="screenshots/minified-playlists-view.png" height="450" alt="minified-playlists-view">](screenshots/minified-playlists-view.png) 
+[<img src="screenshots/minified-playlist-view.png" height="450" alt="minified-playlist-view">](screenshots/minified-playlist-view.png) 
+[<img src="screenshots/minified-track-view.png" height="450" alt="minified-track-view">](screenshots/minified-track-view.png)
+[<img src="screenshots/minified-track-private-view.png" height="450" alt="minified-track-private-view">](screenshots/minified-track-private-view.png)
+
 [<img src="screenshots/playlists-view.png" width="600" alt="playlists-view">](screenshots/playlists-view.png) 
 [<img src="screenshots/playlist-track-view.png" width="600" alt="playlist-track-view">](screenshots/playlist-track-view.png)
 
