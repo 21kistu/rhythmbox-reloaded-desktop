@@ -74,10 +74,3 @@ void NewTrackSelector::setInitial(const char* title, const char* artist, const c
     ui->fileLocationLabel->setText(fileLocation);
     initialSet = true;
 }
-
-
-void NewTrackSelector::on_buttonBox_accepted()
-{
-
-}
-

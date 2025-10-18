@@ -111,17 +111,19 @@ void MainWindow::resizeEvent(QResizeEvent *){
     int width = MainWindow::size().width();
     if (width < 750){
         if (!minified){
-            ui->playlistWidget->setVisible(false);
-            ui->searchBar->setVisible(false);
-            ui->trackBackButton->setVisible(true);
+            if (pm.isPlaying()){
+                ui->playlistWidget->setVisible(false);
+                ui->currentTrackWidget->setVisible(true);
+            } else {
+                ui->playlistWidget->setVisible(true);
+                ui->currentTrackWidget->setVisible(false);
+            }
         }
         minified = true;
         trackOnly = true;
     } else {
         if (minified){
             ui->playlistWidget->setVisible(true);
-            ui->searchBar->setVisible(true);
-            ui->trackBackButton->setVisible(false);
             ui->currentTrackWidget->setVisible(true);
         }
         minified = false;
