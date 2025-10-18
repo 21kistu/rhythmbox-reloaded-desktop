@@ -41,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
         minified = true;
     } else {
         minified = false;
+        ui->trackBackButton->setVisible(false);
     }
 
     // Connect to track completed signal
@@ -55,6 +56,8 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 
     // Hide track view
     ui->currentTrackWidget->setVisible(false);
+    // Hide track details in bottom bar
+    ui->bottomTrack->setVisible(false);
 }
 
 MainWindow::~MainWindow() {
@@ -114,9 +117,11 @@ void MainWindow::resizeEvent(QResizeEvent *){
             if (pm.isPlaying()){
                 ui->playlistWidget->setVisible(false);
                 ui->currentTrackWidget->setVisible(true);
+                ui->trackBackButton->setVisible(true);
             } else {
                 ui->playlistWidget->setVisible(true);
                 ui->currentTrackWidget->setVisible(false);
+                ui->trackBackButton->setVisible(false);
             }
         }
         minified = true;
@@ -125,6 +130,8 @@ void MainWindow::resizeEvent(QResizeEvent *){
         if (minified){
             ui->playlistWidget->setVisible(true);
             ui->currentTrackWidget->setVisible(true);
+            ui->trackBackButton->setVisible(false);
+            ui->bottomTrack->setVisible(false);
         }
         minified = false;
         trackOnly = false;
@@ -211,6 +218,13 @@ bool MainWindow::setTrack(std::string playlistName, PlaylistManager::Track track
         // Update track interface
         ui -> currentTitleLabel -> setText(QString::fromStdString(track.title));
         ui -> currentArtistLabel -> setText(QString::fromStdString(track.artist));
+
+        // Update track details in bottom bar
+        ui->bottomTrackTitle->setText(QString::fromStdString(track.title));
+
+        if (minified && currentView == TRACKS){
+            ui->bottomTrack->setVisible(false);
+        }
 
         // Set total duration
         if(pm.isPlaying()){
@@ -387,6 +401,7 @@ void MainWindow::navigateBack(){
                 updateViewTracker(TRACKS); trackOnly = false;
                 ui->currentTrackWidget->setVisible(false);
                 ui->playlistWidget->setVisible(true);
+                ui->bottomTrack->setVisible(true);
             } else {
                 showAllPlaylists();
             }
@@ -397,6 +412,7 @@ void MainWindow::navigateBack(){
                 updateViewTracker(TRACKS);
                 ui->currentTrackWidget->setVisible(false);
                 ui->playlistWidget->setVisible(true);
+                ui->bottomTrack->setVisible(true);
                 trackOnly = false;
             } else {
                 showAllPlaylists();
@@ -503,3 +519,12 @@ void MainWindow::on_searchBar_returnPressed() {
         setPlaylist(pm.getBrowsingPlaylistName(), ui->searchBar->text().toStdString());
     }
 }
+
+void MainWindow::on_bottomTrackTitle_clicked() {
+    ui->currentTrackWidget->setVisible(true);
+    ui->playlistWidget->setVisible(false);
+    ui->trackBackButton->setVisible(true);
+    ui->bottomTrack->setVisible(false);
+    trackOnly = true; minified = true;
+}
+

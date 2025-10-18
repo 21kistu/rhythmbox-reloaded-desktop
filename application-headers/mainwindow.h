@@ -149,6 +149,8 @@ private slots:
 
     void on_searchBar_returnPressed();
 
+    void on_bottomTrackTitle_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
